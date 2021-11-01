@@ -15,12 +15,28 @@ describe("name", () => {
 });
 
 describe("growUp", () => {
-  it("increments the age by 1,hunger by 5 and decreases the fitness by 3", () => {
+  it("increments the age by 1", () => {
     const pet = new Pet("Fido");
 
     pet.growUp();
 
-    expect(pet.age, pet.hunger, pet.fitness).toEqual(1, 5, 7);
+    expect(pet.age).toEqual(1);
+  });
+
+  it("increases hunger by 5", () => {
+    const pet = new Pet("Fido");
+
+    pet.growUp();
+
+    expect(pet.hunger).toEqual(5);
+  });
+
+  it("decreases the fitness by 3", () => {
+    const pet = new Pet("Fido");
+
+    pet.growUp();
+
+    expect(pet.fitness).toEqual(7);
   });
 });
 
@@ -52,9 +68,8 @@ describe("checkUp", () => {
 
     pet.hunger = 5;
     pet.fitness = 3;
-    pet.checkUp();
 
-    expect(pet.checkUp).toEqual("I am hungry AND I need a walk");
+    expect(pet.checkUp()).toEqual("I am hungry AND I need a walk");
   });
 
   it("returns a i feel great if both fitness is greater than 3 and hunger is greater than 5", () => {
@@ -62,8 +77,30 @@ describe("checkUp", () => {
 
     pet.hunger = 3;
     pet.fitness = 6;
-    pet.checkUp();
 
-    expect(pet.checkUp).toEqual("I feel great!");
+    expect(pet.checkUp()).toEqual("I feel great!");
+  });
+});
+describe("isAlive", () => {
+  it("if the pet's fitness is 0 or less", () => {
+    const pet = new Pet("Fido");
+
+    pet.fitness = 0;
+
+    expect(pet.isAlive).toEqual(false);
+  });
+  it("if the pet's hunger is 10 or more", () => {
+    const pet = new Pet("Fido");
+
+    pet.hunger = 9;
+
+    expect(pet.isAlive).toEqual(true);
+  });
+  it("if the pet's age is 30 or more", () => {
+    const pet = new Pet("Fido");
+
+    pet.age = 32;
+
+    expect(pet.isAlive).toEqual(false);
   });
 });
